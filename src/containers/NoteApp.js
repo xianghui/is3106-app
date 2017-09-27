@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NoteList from '../components/NoteList';
 import NoteForm from '../components/NoteForm';
-import Api from '../helper/api';
+import Api from '../helpers/api';
 import '../note.css';
 
 class NoteApp extends Component {
