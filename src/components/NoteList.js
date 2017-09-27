@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import TodoEntryComponent from './TodoEntryComponent';
-import TodoFormComponent from './TodoFormComponent';
+import React from 'react';
+import Note from './Note';
+import NoteForm from './NoteForm';
 
-function TodoEntryListComponent(props) {
+function NoteList(props) {
   var list = props.notes.map((note) => {
     if (note.editMode) {
       return (
-        <TodoFormComponent
+        <NoteForm
           key={note.id}
           id={note.id}
           value={note.value}
@@ -18,7 +18,7 @@ function TodoEntryListComponent(props) {
     }
     else {
       return (
-        <TodoEntryComponent
+        <Note
           key={note.id}
           value={note.value}
           editMode={note.editMode}
@@ -33,11 +33,11 @@ function TodoEntryListComponent(props) {
   return (
     <div>
       <h3>List of notes:</h3>
-      <div className="notes-entry">
+      <div className="notes-entry-container">
         {list}
       </div>
     </div>
   );
 }
 
-export default TodoEntryListComponent;
+export default NoteList;

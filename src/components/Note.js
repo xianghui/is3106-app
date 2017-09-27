@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-function TodoEntryComponent(props) {
+function Note(props) {
   return (
-    <div>
+    <div className="notes-entry">
       <div className="notes-entry-body">
         {props.value}
       </div>
@@ -14,4 +14,4 @@ function TodoEntryComponent(props) {
   );
 }
 
-export default TodoEntryComponent;
+export default Note;

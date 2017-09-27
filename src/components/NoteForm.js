@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
-import '../todo.css';
+import '../note.css';
 
 
-class TodoFormComponent extends Component {
+//notice that this is not a stateless function but still considered as a "component"
+//because the state maintained in this component is to aid in UI rendering not to store the data
+//and cos we want to use lifecycle methods
+class NoteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +27,7 @@ class TodoFormComponent extends Component {
   renderCancelBtn() {
     if (this.props.editMode) {
       return (
-        <div className="todoForm-cancel-btn">
+        <div className="note-form-cancel">
           <button onClick={() => this.props.onCancelEdit(this.props.id)}>Cancel</button>
         </div>
       );
@@ -32,7 +35,7 @@ class TodoFormComponent extends Component {
     else {
       if (this.state.value.length > 0) {
         return (
-          <div className="todoForm-cancel-btn">
+          <div className="note-form-cancel">
             <button onClick={() => {
               this.setState({ value: '' });
             }}>Cancel</button>
@@ -53,7 +56,7 @@ class TodoFormComponent extends Component {
     }
 
     return (
-      <div className="todoForm-add-btn">
+      <div className="note-form-add">
         <button onClick={() => {
           this.props.onDone(this.state);
           this.resetState();
@@ -66,9 +69,9 @@ class TodoFormComponent extends Component {
     var cancelBtn = this.renderCancelBtn();
     var addOrEditBtn = this.renderAddOrEditBtn();
     return (
-      <div className="todoFormContainer">
+      <div className="note-form-container">
         <textarea
-          className="todoForm"
+          className="note-form"
           rows="3"
           placeholder="Enter note"
           ref={(input) => this.textbox = input}
@@ -82,13 +85,19 @@ class TodoFormComponent extends Component {
     );
   }
 
-  //TODO: use lifecycle to do a focus on the textbox
+  //lifecycle methods
+  componentDidMount(){
+    if (this.state.editMode){
+      this.textbox.focus();
+      this.textbox.select();
+    }
+  }
 }
 
-TodoFormComponent.defaultProps = {
+NoteForm.defaultProps = {
   id: 0,
   value: '',
   editMode: false,
 }
 
-export default TodoFormComponent;
+export default NoteForm;

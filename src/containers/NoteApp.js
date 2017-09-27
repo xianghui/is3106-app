@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TodoEntryListComponent from '../components/TodoEntryListComponent';
-import TodoFormComponent from '../components/TodoFormComponent';
+import NoteList from '../components/NoteList';
+import NoteForm from '../components/NoteForm';
 
-class TodoContainer extends Component {
+class NoteApp extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,9 +39,9 @@ class TodoContainer extends Component {
   }
 
   handleAddEdit(note) {
-    if (note.id == 0) {
+    if (note.id === 0) {
       //add action
-      if (note.value.trim() == "") return;
+      if (note.value.trim() === "") return;
       note.id = this.state.index;
       this.setState({
         notes: [...this.state.notes, note],
@@ -50,7 +50,7 @@ class TodoContainer extends Component {
     }
     else{
       //edit action
-      if (note.value.trim() == "") {
+      if (note.value.trim() === "") {
         //cancel edit
         this.handleEdit(note.id, false);
         return
@@ -73,9 +73,9 @@ class TodoContainer extends Component {
 
   render() {
     return (
-      <div>
-        <TodoFormComponent onDone={this.handleAddEdit} /><br /><br />
-        <TodoEntryListComponent
+      <div className="note-container">
+        <NoteForm onDone={this.handleAddEdit} /><br /><br />
+        <NoteList
           notes={this.state.notes}
           onEdit={this.handleEdit}
           onDelete={this.handleDelete}
@@ -86,4 +86,4 @@ class TodoContainer extends Component {
   }
 }
 
-export default TodoContainer;
+export default NoteApp;
