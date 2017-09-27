@@ -1,6 +1,7 @@
 import React from 'react';
 import Note from './Note';
 import NoteForm from './NoteForm';
+import '../note.css';
 
 function NoteList(props) {
   var list = props.notes.map((note) => {
@@ -21,14 +22,13 @@ function NoteList(props) {
         <Note
           key={note.id}
           value={note.value}
-          editMode={note.editMode}
           id={note.id}
           onEdit={(id) => props.onEdit(id, true)}
           onDelete={props.onDelete}
         />
       );
     }
-  })
+  });
 
   return (
     <div>

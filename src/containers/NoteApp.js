@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteList from '../components/NoteList';
 import NoteForm from '../components/NoteForm';
+import '../note.css';
 
 class NoteApp extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class NoteApp extends Component {
     this.handleAddEdit = this.handleAddEdit.bind(this);
   }
 
-  //method to handle
+  //method to set the editMode status
   handleEdit(id, editMode) {
     var notes = this.state.notes;
     for (var i = 0; i < notes.length; i++) {
@@ -28,6 +29,7 @@ class NoteApp extends Component {
     this.setState({ notes });
   }
 
+  //method to delete a note with a particular id
   handleDelete(id) {
     var notes = this.state.notes;
     notes = notes.filter((item) => {
@@ -38,6 +40,8 @@ class NoteApp extends Component {
     this.setState({ notes });
   }
 
+  //method to edit or add a note depending on the id
+  //(id = 0 implies add)
   handleAddEdit(note) {
     if (note.id === 0) {
       //add action

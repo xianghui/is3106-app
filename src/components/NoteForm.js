@@ -85,7 +85,7 @@ class NoteForm extends Component {
     );
   }
 
-  //lifecycle methods
+  //this (lifecycle) method is triggered when this component is mounted
   componentDidMount(){
     if (this.state.editMode){
       this.textbox.focus();
@@ -98,6 +98,6 @@ NoteForm.defaultProps = {
   id: 0,
   value: '',
   editMode: false,
-}
+};
 
 export default NoteForm;
