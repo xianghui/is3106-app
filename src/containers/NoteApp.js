@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoteList from '../components/NoteList';
 import NoteForm from '../components/NoteForm';
+import Api from '../helper/api';
 import '../note.css';
 
 class NoteApp extends Component {
@@ -88,6 +89,33 @@ class NoteApp extends Component {
       </div>
     );
   }
+  //this (lifecycle) method is triggered when this component is mounted
+  fetchAllNotes(){
+    Api.getNotes()
+      .then((res) =>{
+        var index = 0;
+        var notes = res.data;
+        for (var i = 0 ; i < notes.length; i++){
+          var curr = notes[i];
+          if (curr.id > index){
+            index = curr.id;
+          }
+        }
+        index++;
+
+        //update the state of the notes and index
+        this.setState({notes, index});
+      })
+      .catch((err) =>{
+        alert("Did not manage to fetch notes");
+      });
+  }
+
+  componentDidMount(){
+    //load the notes from server
+    this.fetchAllNotes();
+  }
+  //---------------------
 }
 
 export default NoteApp;
