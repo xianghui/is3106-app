@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import '../note.css';
-
+import "../note.css";
 
 //notice that this is not a stateless function but still considered as a "component"
 //because the state maintained in this component is to aid in UI rendering not to store the data
@@ -10,17 +9,13 @@ class NoteForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
       value: this.props.value,
-      editMode: this.props.editMode
     };
   }
 
-  resetState(){
+  resetState() {
     this.setState({
-      id: this.props.id,
       value: this.props.value,
-      editMode: this.props.editMode
     });
   }
 
@@ -28,21 +23,25 @@ class NoteForm extends Component {
     if (this.props.editMode) {
       return (
         <div className="note-form-cancel">
-          <button onClick={() => this.props.onCancelEdit(this.props.id)}>Cancel</button>
+          <button onClick={() => this.props.onCancelEdit(this.props.id)}>
+            Cancel
+          </button>
         </div>
       );
-    }
-    else {
+    } else {
       if (this.state.value.length > 0) {
         return (
           <div className="note-form-cancel">
-            <button onClick={() => {
-              this.setState({ value: '' });
-            }}>Cancel</button>
+            <button
+              onClick={() => {
+                this.setState({ value: "" });
+              }}
+            >
+              Cancel
+            </button>
           </div>
         );
-      }
-      else {
+      } else {
         return "";
       }
     }
@@ -57,10 +56,17 @@ class NoteForm extends Component {
 
     return (
       <div className="note-form-add">
-        <button onClick={() => {
-          this.props.onDone(this.state);
-          this.resetState();
-        }}>{buttonText}</button>
+        <button
+          onClick={() => {
+            this.props.onDone({
+              id: this.props.id,
+              value: this.state.value,
+            });
+            this.resetState();
+          }}
+        >
+          {buttonText}
+        </button>
       </div>
     );
   }
@@ -74,11 +80,12 @@ class NoteForm extends Component {
           className="note-form"
           rows="3"
           placeholder="Enter note"
-          ref={(input) => this.textbox = input}
+          ref={(input) => (this.textbox = input)}
           value={this.state.value}
           onChange={(e) => {
             this.setState({ value: e.target.value });
-          }}></textarea>
+          }}
+        ></textarea>
         {cancelBtn}
         {addOrEditBtn}
       </div>
@@ -86,8 +93,8 @@ class NoteForm extends Component {
   }
 
   //this (lifecycle) method is triggered when this component is mounted
-  componentDidMount(){
-    if (this.state.editMode){
+  componentDidMount() {
+    if (this.props.editMode) {
       this.textbox.focus();
       this.textbox.select();
     }
@@ -96,7 +103,7 @@ class NoteForm extends Component {
 
 NoteForm.defaultProps = {
   id: 0,
-  value: '',
+  value: "",
   editMode: false,
 };
 
